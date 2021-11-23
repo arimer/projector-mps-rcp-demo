@@ -3,6 +3,7 @@
   <component name="MPSProject">
     <projectModules>
       <modulePath path="$PROJECT_DIR$/languages/com.itemis.rcp.lang/com.itemis.rcp.lang.mpl" folder="" />
+      <modulePath path="$PROJECT_DIR$/solutions/com.itemis.rcp.lang.sandbox/com.itemis.rcp.lang.sandbox.msd" folder="" />
     </projectModules>
   </component>
 </project>
