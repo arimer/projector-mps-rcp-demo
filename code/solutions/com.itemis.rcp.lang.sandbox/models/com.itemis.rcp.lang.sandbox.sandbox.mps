@@ -11,9 +11,16 @@
       <concept id="1668161615111101356" name="com.itemis.rcp.lang.structure.MyChunkContent" flags="ng" index="27xhIa" />
     </language>
     <language id="f0fd486f-8577-43e9-b671-3d118449c6e7" name="org.iets3.components.core">
+      <concept id="7804632404593513952" name="org.iets3.components.core.structure.ComponentKind" flags="ng" index="1i0KCM" />
       <concept id="7804632404593342574" name="org.iets3.components.core.structure.EmptyComponentsChunkContent" flags="ng" index="1i1AuW" />
+      <concept id="7804632404593342035" name="org.iets3.components.core.structure.IComponentsChunkContent" flags="ng" index="1i1AA1">
+        <property id="6142232665969969516" name="public" index="13Nl5X" />
+      </concept>
       <concept id="7804632404593341326" name="org.iets3.components.core.structure.ComponentsChunk" flags="ng" index="1i1ALs">
         <child id="7804632404593342038" name="contents" index="1i1AA4" />
+      </concept>
+      <concept id="7804632404593231361" name="org.iets3.components.core.structure.Component" flags="ng" index="1i1XBj">
+        <child id="7804632404593514231" name="kind" index="1i0K$_" />
       </concept>
     </language>
     <language id="ceab5195-25ea-4f22-9b92-103b95ca8c0c" name="jetbrains.mps.lang.core">
@@ -26,7 +33,11 @@
     <property role="TrG5h" value="DemoChunk" />
     <node concept="27xhIa" id="1sAw2qgDoHR" role="1i1AA4" />
     <node concept="1i1AuW" id="1sAw2qgDsOU" role="1i1AA4" />
-    <node concept="1i1AuW" id="1sAw2qgDsOZ" role="1i1AA4" />
+    <node concept="1i1XBj" id="1sAw2qgDH4b" role="1i1AA4">
+      <property role="13Nl5X" value="true" />
+      <property role="TrG5h" value="SomeNewContent" />
+      <node concept="1i0KCM" id="1sAw2qgDH4d" role="1i0K$_" />
+    </node>
     <node concept="1i1AuW" id="1sAw2qgDsyd" role="1i1AA4" />
   </node>
 </model>
