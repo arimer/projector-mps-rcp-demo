@@ -1,0 +1,15 @@
+name: Projector-MPS URL
+
+on:
+  pull_request_target:
+    types: [synchronize, opened, reopened]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: coolya/action-pr-link@v1.0
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          modelix-url: "http://foo.bar"
