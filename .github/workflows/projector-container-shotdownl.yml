@@ -1,0 +1,26 @@
+name: Shutdown Projector MPS Instance
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  my-job:
+    name: My Job
+    runs-on: ubuntu-latest
+
+    steps:
+      - name:  Extract Branch Name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+
+      - name: execute ssh command
+        uses: fifsky/ssh-action@v0.0.6
+        with:
+          command: |
+            docker stop ${{ steps.extract_branch.outputs.branch }}
+            docker rm ${{ steps.extract_branch.outputs.branch }}
+          host: ${{ secrets.HOST }}
+          user: ${{ secrets.USER_NAME }}
+          key: ${{ secrets.GHA_KEY }}
