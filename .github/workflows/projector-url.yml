@@ -21,11 +21,11 @@ jobs:
         id: extract_branch
 
       - name: Calc Port Number
-        run: echo "##[set-output name=branch;]$(echo $((4000 + ${env.PR_AS_PORT_NR})))"
+        run: echo "##[set-output name=port;]$(echo $((4000 + ${env.PR_AS_PORT_NR})))"
         id: extract_port
 
       - name: Print github PR information
-        run: echo branch ${{ steps.extract_branch.outputs.branch }} PORTR_NUMBER ${{ steps.extract_port }} REPO_NAME ${{env.REPO_NAME }}
+        run: echo branch ${{ steps.extract_branch.outputs.branch }} PORTR_NUMBER ${{ steps.extract_port.outputs.port }} REPO_NAME ${{env.REPO_NAME }}
 #      - name: execute ssh command
 #        uses: fifsky/ssh-action@v0.0.6
 #        with:
@@ -38,4 +38,4 @@ jobs:
       - uses: coolya/action-pr-link@v1.0
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          modelix-url: "http://51.15.137.138:${{ steps.extract_port }}"
+          modelix-url: "http://51.15.137.138:${{ steps.extract_port.outputs.port }}"
