@@ -1,15 +1,39 @@
-name: Projector-MPS URL
+name: Creat Projector MPS Instance
 
 on:
   pull_request_target:
-    types: [synchronize, opened, reopened]
+    types: [ synchronize, opened, reopened ]
 
 jobs:
-  build:
+  my-job:
+    name: My Job
     runs-on: ubuntu-latest
 
+    env:
+      # only works on pull_request events
+      PR_NUMBER1: ${{ github.event.number }}
+      REPO_NAME: ${{ github.event.repository.name }}
+      PR_NUMBER2: $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+
     steps:
-      - uses: coolya/action-pr-link@v1.0
+      - name:  Extract branch
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+
+      - name: Print github PR information
+        run: echo branch ${{ steps.extract_branch.outputs.branch }} PR_NUMBER ${{ github.event.number }} REPO_1 ${{env.REPO_NAME }} REPO_2 ${{env.PR_NUMBER2 }}
+#      - name: execute ssh command
+#        uses: fifsky/ssh-action@v0.0.6
+#        with:
+#          command: |
+#            docker run -d -p 8887:8887 projectormps/projector-mps:2020.3  ${{ steps.extract_branch.outputs.branch }} https://github.com/arimer/projector-mps-rcp-demo.git
+#            docker ps
+#          host: ${{ secrets.HOST }}
+#          user: ${{ secrets.USER_NAME }}
+#          key: ${{ secrets.GHA_KEY }}
+      - name: Add projector URL
+        uses: coolya/action-pr-link@v1.0
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          modelix-url: "http://51.15.137.138:8887"
+          modelix-url: "http://51.15.137.138:${{ github.event.number }}"
