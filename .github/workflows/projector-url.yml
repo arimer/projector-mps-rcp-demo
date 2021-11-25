@@ -1,4 +1,4 @@
-name: Creat Projector MPS Instance
+name: Create Projector MPS Instance
 
 on:
   pull_request_target:
@@ -11,11 +11,10 @@ jobs:
 
     env:
       # only works on pull_request events
-      PR_AS_PORT_NR: ${{ github.event.number }}
       REPO_NAME: ${{ github.event.repository.name }}
 
     steps:
-      - name:  Extract branch
+      - name:  Extract Branch Name
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
@@ -24,17 +23,17 @@ jobs:
         run: echo "##[set-output name=port;]$(echo $((4000 + ${{github.event.number}})))"
         id: extract_port
 
-      - name: Print github PR information
+      - name: Print github PR Info
         run: echo branch ${{ steps.extract_branch.outputs.branch }} PORTR_NUMBER ${{ steps.extract_port.outputs.port }} REPO_NAME ${{env.REPO_NAME }}
-#      - name: execute ssh command
-#        uses: fifsky/ssh-action@v0.0.6
-#        with:
-#          command: |
-#            docker run -d -p 8887:8887 projectormps/projector-mps:2020.3  ${{ steps.extract_branch.outputs.branch }} https://github.com/arimer/projector-mps-rcp-demo.git
-#            docker ps
-#          host: ${{ secrets.HOST }}
-#          user: ${{ secrets.USER_NAME }}
-#          key: ${{ secrets.GHA_KEY }}
+      - name: execute ssh command
+        uses: fifsky/ssh-action@v0.0.6
+        with:
+          command: |
+            docker run --name ${{ steps.extract_branch.outputs.branch }} -d -p ${{ steps.extract_port.outputs.port }}:8887 projectormps/projector-mps:2020.3  ${{ steps.extract_branch.outputs.branch }} https://github.com/arimer/projector-mps-rcp-demo.git
+            docker ps
+          host: ${{ secrets.HOST }}
+          user: ${{ secrets.USER_NAME }}
+          key: ${{ secrets.GHA_KEY }}
       - uses: coolya/action-pr-link@v1.0
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
