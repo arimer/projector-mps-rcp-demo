@@ -11,7 +11,7 @@ jobs:
 
     env:
       # only works on pull_request events
-      PR_AS_PORT_NR: $((${{ github.event.number}} + 4000))
+      PR_AS_PORT_NR: ${{ github.event.number}}
       REPO_NAME: ${{ github.event.repository.name }}
 
     steps:
@@ -20,8 +20,13 @@ jobs:
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
 
+      - name: Calc Port Number
+        shell: bash
+        run: echo $((4000 + ${env.PR_AS_PORT_NR}))
+        id: extract_port
+
       - name: Print github PR information
-        run: echo branch ${{ steps.extract_branch.outputs.branch }} PR_NUMBER ${{ env.PR_AS_PORT_NR }} REPO_NAME ${{env.REPO_NAME }}
+        run: echo branch ${{ steps.extract_branch.outputs.branch }} PORTR_NUMBER ${{ steps.extract_branch }} REPO_NAME ${{env.REPO_NAME }}
 #      - name: execute ssh command
 #        uses: fifsky/ssh-action@v0.0.6
 #        with:
