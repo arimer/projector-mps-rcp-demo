@@ -15,15 +15,10 @@ jobs:
 
     steps:
       - name:  Extract Branch Name
-        if: github.event_name != 'pull_request'
-        shell: bash
-        run: echo "##[set-env name=BRANCH_NAME;]$(echo ${GITHUB_REF#refs/heads/})"
-        id: extract_branch
-
-      # extract branch name on pull request
-      - name: Extract Branch Name on PR
         if: github.event_name == 'pull_request'
-        run: echo "##[set-env name=BRANCH_NAME;]$(echo ${GITHUB_HEAD_REF})"
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_HEAD_REF})"
+        id: extract_branch
 
       - name: Calc Port Number
         run: echo "##[set-output name=port;]$(echo $((4000 + ${{github.event.number}})))"
@@ -35,7 +30,7 @@ jobs:
         uses: fifsky/ssh-action@v0.0.6
         with:
           command: |
-            docker run --name $BRANCH_NAME -d -p ${{ steps.extract_port.outputs.port }}:8887 projectormps/projector-mps:2020.3  $BRANCH_NAME https://github.com/arimer/projector-mps-rcp-demo.git
+            docker run --name ${{ steps.extract_branch.outputs.branch }} -d -p ${{ steps.extract_port.outputs.port }}:8887 projectormps/projector-mps:2020.3  ${{ steps.extract_branch.outputs.branch }}  https://github.com/arimer/projector-mps-rcp-demo.git
             docker ps
           host: ${{ secrets.HOST }}
           user: ${{ secrets.USER_NAME }}

@@ -11,17 +11,16 @@ jobs:
 
     steps:
       - name: Extract Branch Name
-        if: github.event_name != 'pull_request'
         shell: bash
-        run: echo "##[set-env name=BRANCH_NAME;]$(echo ${GITHUB_REF#refs/heads/})"
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_HEAD_REF})"
         id: extract_branch
 
       - name: execute ssh command
         uses: fifsky/ssh-action@v0.0.6
         with:
           command: |
-            docker stop $BRANCH_NAME
-            docker rm $BRANCH_NAME
+            docker stop ${{ steps.extract_branch.outputs.branch }}
+            docker rm ${{ steps.extract_branch.outputs.branch }}
           host: ${{ secrets.HOST }}
           user: ${{ secrets.USER_NAME }}
           key: ${{ secrets.GHA_KEY }}
