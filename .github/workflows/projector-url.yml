@@ -22,9 +22,7 @@ jobs:
 
       - name: Calc Port Number
         run: |
-            if ["env.PR_AS_PORT_NR" != ""]; then
-              echo $((4000 + ${{env.PR_AS_PORT_NR}}))
-            fi
+          echo $((4000 + ${{env.PR_AS_PORT_NR}}))
         id: extract_port
 
       - name: Print github PR information
