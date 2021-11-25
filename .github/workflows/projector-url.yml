@@ -21,7 +21,7 @@ jobs:
         id: extract_branch
 
       - name: Calc Port Number
-        run: echo "##[set-output name=port;]$(echo $((4000 + ${env.PR_AS_PORT_NR})))"
+        run: echo "##[set-output name=port;]$(echo $((4000 + ${{github.event.number}})))"
         id: extract_port
 
       - name: Print github PR information
