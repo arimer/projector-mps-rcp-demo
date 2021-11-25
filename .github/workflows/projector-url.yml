@@ -1,8 +1,8 @@
 name: Creat Projector MPS Instance
 
-on: push
-#  pull_request_target:
-#    types: [synchronize, opened, reopened]
+on:
+  pull_request_target:
+    types: [synchronize, opened, reopened]
 
 jobs:
   my-job:
@@ -11,7 +11,6 @@ jobs:
 
     env:
       # only works on pull_request events
-
       PR_AS_PORT_NR: ${{ github.event.number }}
       REPO_NAME: ${{ github.event.repository.name }}
 
