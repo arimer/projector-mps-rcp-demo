@@ -35,7 +35,7 @@ jobs:
         uses: fifsky/ssh-action@v0.0.6
         with:
           command: |
-            docker run --name $BRANCH_NAME -d -p ${{ steps.extract_port.outputs.port }}:8887 projectormps/projector-mps:2020.3  $BRANCH_NAME https://github.com/arimer/projector-mps-rcp-demo.git
+            docker run --name ${{BRANCH_NAME}} -d -p ${{ steps.extract_port.outputs.port }}:8887 projectormps/projector-mps:2020.3  ${{BRANCH_NAME}}  https://github.com/arimer/projector-mps-rcp-demo.git
             docker ps
           host: ${{ secrets.HOST }}
           user: ${{ secrets.USER_NAME }}

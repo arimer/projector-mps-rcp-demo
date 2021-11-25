@@ -20,8 +20,8 @@ jobs:
         uses: fifsky/ssh-action@v0.0.6
         with:
           command: |
-            docker stop $BRANCH_NAME
-            docker rm $BRANCH_NAME
+            docker stop ${{ BRANCH_NAME }}
+            docker rm ${{ BRANCH_NAME }}
           host: ${{ secrets.HOST }}
           user: ${{ secrets.USER_NAME }}
           key: ${{ secrets.GHA_KEY }}
