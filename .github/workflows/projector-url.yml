@@ -15,7 +15,7 @@ jobs:
       REPO_NAME: ${{ github.event.repository.name }}
 
     steps:
-      - name:  Extract branch2
+      - name:  Extract branch
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
@@ -26,7 +26,7 @@ jobs:
         id: extract_port
 
       - name: Print github PR information
-        run: echo branch ${{ steps.extract_branch.outputs.branch }} PORTR_NUMBER ${{ steps.extract_branch }} REPO_NAME ${{env.REPO_NAME }}
+        run: echo branch ${{ steps.extract_branch.outputs.branch }} PORTR_NUMBER ${{ steps.extract_port }} REPO_NAME ${{env.REPO_NAME }}
 #      - name: execute ssh command
 #        uses: fifsky/ssh-action@v0.0.6
 #        with:
@@ -39,4 +39,4 @@ jobs:
       - uses: coolya/action-pr-link@v1.0
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          modelix-url: "http://51.15.137.138:${{ env.PR_AS_PORT_NR }}"
+          modelix-url: "http://51.15.137.138:${{ steps.extract_port }}"
