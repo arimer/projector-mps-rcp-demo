@@ -12,7 +12,7 @@ jobs:
     env:
       # only works on pull_request events
 
-      PR_AS_PORT_NR: ${{ github.event.issue.number }}
+      PR_AS_PORT_NR: ${{ github.event.number }}
       REPO_NAME: ${{ github.event.repository.name }}
 
     steps:
