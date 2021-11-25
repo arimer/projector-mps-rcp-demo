@@ -32,6 +32,6 @@ jobs:
 #          user: ${{ secrets.USER_NAME }}
 #          key: ${{ secrets.GHA_KEY }}
       - uses: coolya/action-pr-link@v1.0
-          with:
-            repo-token: "${{ secrets.GITHUB_TOKEN }}"
-            modelix-url: "http://51.15.137.138:${{ env.PR_AS_PORT_NR }}"
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          modelix-url: "http://51.15.137.138:${{ env.PR_AS_PORT_NR }}"
