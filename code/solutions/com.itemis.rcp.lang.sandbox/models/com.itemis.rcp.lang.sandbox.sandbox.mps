@@ -24,11 +24,7 @@
   </registry>
   <node concept="1i1ALs" id="1sAw2qgDoHP">
     <property role="TrG5h" value="DemoChunk" />
-    <node concept="27xhIa" id="1sAw2qgDoHR" role="1i1AA4" />
-    <node concept="1i1AuW" id="7YpIm7$FfKA" role="1i1AA4" />
-    <node concept="27xhIa" id="7YpIm7$FfKP" role="1i1AA4" />
-    <node concept="1i1AuW" id="7YpIm7$FfOH" role="1i1AA4" />
-    <node concept="1i1AuW" id="7YpIm7$FfOR" role="1i1AA4" />
+    <node concept="27xhIa" id="7YpIm7$FfQV" role="1i1AA4" />
     <node concept="1i1AuW" id="7YpIm7$FfPf" role="1i1AA4" />
     <node concept="1i1AuW" id="1sAw2qgDsOU" role="1i1AA4" />
     <node concept="1i1AuW" id="7YpIm7$FfOz" role="1i1AA4" />
